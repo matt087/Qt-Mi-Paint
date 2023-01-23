@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Recursos/Iconos/salvar.png</file>
+        <file>Recursos/Iconos/papelera-de-reciclaje.png</file>
+        <file>Recursos/Iconos/agregar.png</file>
+        <file>Recursos/Iconos/lapices-de-color.png</file>
+        <file>Recursos/Iconos/conjunto-cuadrado.png</file>
+        <file>Recursos/Iconos/pincel-de-arte.png</file>
+        <file>Recursos/Iconos/brujula.png</file>
+        <file>Recursos/Iconos/lapiz.png</file>
+    </qresource>
+</RCC>

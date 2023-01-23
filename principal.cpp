@@ -117,11 +117,13 @@ void Principal::on_actionGuardar_triggered()
 {
     // Abrir cuadro de diálogo para obtener el nombre del archivo
     QString nombreArchivo = QFileDialog::getSaveFileName(this,
-                                                         "Guardar imagen",
+                                                         tr("Save File"),
                                                          QString(),
-                                                         "Imágenes .png (*.png)");
+                                                         tr("Imágenes (*.png)"));
+   qDebug()<<nombreArchivo;
     // Validar que el nombre del archivo no sea vacío
-    if ( !nombreArchivo.isEmpty() ){
+    if (!nombreArchivo.isEmpty())
+    {
         // Guardar imagen
         if (mImagen->save(nombreArchivo)){
             // Si todo va bien, muestra un mensaje de información
