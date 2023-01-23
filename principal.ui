@@ -56,7 +56,32 @@
    <addaction name="menuForma"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNuevo"/>
+   <addaction name="actionGuardar"/>
+   <addaction name="actionSalir"/>
+   <addaction name="separator"/>
+   <addaction name="actionColor"/>
+   <addaction name="actionAncho"/>
+   <addaction name="separator"/>
+   <addaction name="actionLineas"/>
+   <addaction name="actionLibre"/>
+   <addaction name="actionCircunferencias"/>
+  </widget>
   <action name="actionNuevo">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/agregar.png</normaloff>:/Recursos/Iconos/agregar.png</iconset>
+   </property>
    <property name="text">
     <string>Nuevo</string>
    </property>
@@ -65,6 +90,10 @@
    </property>
   </action>
   <action name="actionGuardar">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/salvar.png</normaloff>:/Recursos/Iconos/salvar.png</iconset>
+   </property>
    <property name="text">
     <string>Guardar</string>
    </property>
@@ -73,6 +102,10 @@
    </property>
   </action>
   <action name="actionSalir">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/papelera-de-reciclaje.png</normaloff>:/Recursos/Iconos/papelera-de-reciclaje.png</iconset>
+   </property>
    <property name="text">
     <string>Salir</string>
    </property>
@@ -81,6 +114,10 @@
    </property>
   </action>
   <action name="actionColor">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/lapices-de-color.png</normaloff>:/Recursos/Iconos/lapices-de-color.png</iconset>
+   </property>
    <property name="text">
     <string>Color</string>
    </property>
@@ -89,6 +126,10 @@
    </property>
   </action>
   <action name="actionAncho">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/conjunto-cuadrado.png</normaloff>:/Recursos/Iconos/conjunto-cuadrado.png</iconset>
+   </property>
    <property name="text">
     <string>Ancho</string>
    </property>
@@ -97,6 +138,10 @@
    </property>
   </action>
   <action name="actionLineas">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/lapiz.png</normaloff>:/Recursos/Iconos/lapiz.png</iconset>
+   </property>
    <property name="text">
     <string>Lineas</string>
    </property>
@@ -104,6 +149,10 @@
   <action name="actionLibre">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/pincel-de-arte.png</normaloff>:/Recursos/Iconos/pincel-de-arte.png</iconset>
    </property>
    <property name="text">
     <string>Libre</string>
@@ -115,11 +164,17 @@
    </property>
   </action>
   <action name="actionCircunferencias">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/brujula.png</normaloff>:/Recursos/Iconos/brujula.png</iconset>
+   </property>
    <property name="text">
     <string>Circunferencias</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
