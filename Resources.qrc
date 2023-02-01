@@ -8,5 +8,8 @@
         <file>Recursos/Iconos/pincel-de-arte.png</file>
         <file>Recursos/Iconos/brujula.png</file>
         <file>Recursos/Iconos/lapiz.png</file>
+        <file>Recursos/Iconos/abrir-documento.png</file>
+        <file>Recursos/Iconos/rectangulo.png</file>
+        <file>Recursos/Iconos/pintar.png</file>
     </qresource>
 </RCC>

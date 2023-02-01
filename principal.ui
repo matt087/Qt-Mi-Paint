@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Principal</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Resources.qrc">
+    <normaloff>:/Recursos/Iconos/pintar.png</normaloff>:/Recursos/Iconos/pintar.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -23,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
@@ -31,6 +35,7 @@
      <string>Archivo</string>
     </property>
     <addaction name="actionNuevo"/>
+    <addaction name="actionAbrir"/>
     <addaction name="actionGuardar"/>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
@@ -48,7 +53,7 @@
     </property>
     <addaction name="actionLineas"/>
     <addaction name="actionLibre"/>
-    <addaction name="actionRect_nculos"/>
+    <addaction name="actionRectangulos"/>
     <addaction name="actionCircunferencias"/>
    </widget>
    <addaction name="menuArchivo"/>
@@ -66,6 +71,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionAbrir"/>
    <addaction name="actionNuevo"/>
    <addaction name="actionGuardar"/>
    <addaction name="actionSalir"/>
@@ -76,6 +82,7 @@
    <addaction name="actionLineas"/>
    <addaction name="actionLibre"/>
    <addaction name="actionCircunferencias"/>
+   <addaction name="actionRectangulos"/>
   </widget>
   <action name="actionNuevo">
    <property name="icon">
@@ -138,6 +145,9 @@
    </property>
   </action>
   <action name="actionLineas">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="Resources.qrc">
      <normaloff>:/Recursos/Iconos/lapiz.png</normaloff>:/Recursos/Iconos/lapiz.png</iconset>
@@ -158,18 +168,40 @@
     <string>Libre</string>
    </property>
   </action>
-  <action name="actionRect_nculos">
+  <action name="actionRectangulos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/rectangulo.png</normaloff>:/Recursos/Iconos/rectangulo.png</iconset>
+   </property>
    <property name="text">
     <string>Rectánculos</string>
    </property>
+   <property name="toolTip">
+    <string>Rectángulos</string>
+   </property>
   </action>
   <action name="actionCircunferencias">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="Resources.qrc">
      <normaloff>:/Recursos/Iconos/brujula.png</normaloff>:/Recursos/Iconos/brujula.png</iconset>
    </property>
    <property name="text">
     <string>Circunferencias</string>
+   </property>
+  </action>
+  <action name="actionAbrir">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Recursos/Iconos/abrir-documento.png</normaloff>:/Recursos/Iconos/abrir-documento.png</iconset>
+   </property>
+   <property name="text">
+    <string>Abrir</string>
    </property>
   </action>
  </widget>

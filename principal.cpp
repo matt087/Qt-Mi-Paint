@@ -8,6 +8,7 @@ Principal::Principal(QWidget *parent)
     , ui(new Ui::Principal)
 {
     ui->setupUi(this);
+    setWindowTitle("MI PAINT");
     // Instanciando la imagen (creando)
     mImagen = new QImage(this->size(),QImage::Format_ARGB32_Premultiplied);
     // Rellenar la imagen de color blanco
@@ -20,6 +21,8 @@ Principal::Principal(QWidget *parent)
     mColor = Qt::black;
     mAncho = DEFAULT_ANCHO;
     mNumLineas = 0;
+    m_opcion = 1;
+    ui->actionLibre->setChecked(true);
 }
 
 Principal::~Principal()
@@ -35,7 +38,7 @@ void Principal::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     // Dibujar la imagen
     painter.drawImage(0, 0, *mImagen);
-    // Acepatr el evento
+    // Aceptar el evento
     event->accept();
 }
 
@@ -62,26 +65,51 @@ void Principal::mouseMoveEvent(QMouseEvent *event)
     mFinal = event->pos();
     // Crear un pincel y establecer atributos
     QPen pincel;
-    pincel.setColor(mColor);
-    pincel.setWidth(mAncho);
-    // Dibujar una linea
-    mPainter->setPen(pincel);
-    mPainter->drawLine(mInicial, mFinal);
-    // Mostrar el número de líneas en la barra de estado
-    ui->statusbar->showMessage("Número de líneas: " + QString::number(++mNumLineas));
-    // Actualizar la interfaz (repinta con paintEvent)
-    update();
-    // actualizar el punto inicial
-    mInicial = mFinal;
+        pincel.setColor(mColor);
+        pincel.setWidth(mAncho);
+
+    if(m_opcion==1){
+        // Dibujar una linea
+        mPainter->setPen(pincel);
+        mPainter->drawLine(mInicial, mFinal);
+        // Mostrar el número de líneas en la barra de estado
+        ui->statusbar->showMessage("Número de líneas: " + QString::number(++mNumLineas));
+        // Actualizar la interfaz (repinta con paintEvent)
+        update();
+        // actualizar el punto inicial
+        mInicial = mFinal;
+     }
 }
 
 void Principal::mouseReleaseEvent(QMouseEvent *event)
 {
     // Bajar la bandera (no se puede dibujar)
     mPuedeDibujar = false;
-    // Aceptar el vento
-    event->accept();
+    mFinal= event->pos();
+    QPen pincel;
+        pincel.setColor(mColor);
+        pincel.setWidth(mAncho);
 
+    if(m_opcion==2){
+        mPainter->setPen(pincel);
+        mPainter->drawLine(mInicial,mFinal);
+        update();
+        event->accept();
+    }
+    if(m_opcion==3){
+        QRect rectangulo (mInicial, mFinal);
+        mPainter->setPen(pincel);
+        mPainter->drawRect(rectangulo);
+        update();
+        event->accept();
+    }
+    if(m_opcion==4){
+        QRectF circulos (mInicial, mFinal);
+        mPainter->setPen(pincel);
+        mPainter->drawEllipse(circulos);
+        update();
+        event->accept();
+    }
 }
 
 
@@ -117,13 +145,11 @@ void Principal::on_actionGuardar_triggered()
 {
     // Abrir cuadro de diálogo para obtener el nombre del archivo
     QString nombreArchivo = QFileDialog::getSaveFileName(this,
-                                                         tr("Save File"),
-                                                         QString(),
-                                                         tr("Imágenes (*.png)"));
-   qDebug()<<nombreArchivo;
+                                                         "Guardar imagen",
+                                                         QDir::home().absolutePath() + "/img.png",
+                                                         "Imágenes .png (*.png)");
     // Validar que el nombre del archivo no sea vacío
-    if (!nombreArchivo.isEmpty())
-    {
+    if ( !nombreArchivo.isEmpty() ){
         // Guardar imagen
         if (mImagen->save(nombreArchivo)){
             // Si todo va bien, muestra un mensaje de información
@@ -137,4 +163,59 @@ void Principal::on_actionGuardar_triggered()
                                  "No se pudo almacenar la imagen.");
         }
     }
+}
+
+void Principal::on_actionLibre_triggered()
+{
+    m_opcion = 1;
+    ui->actionLineas->setChecked(false);
+    ui->actionLibre->setChecked(true);
+    ui->actionRectangulos->setChecked(false);
+    ui->actionCircunferencias->setChecked(false);
+}
+
+void Principal::on_actionLineas_triggered()
+{
+    m_opcion = 2;
+    ui->actionLineas->setChecked(true);
+    ui->actionLibre->setChecked(false);
+    ui->actionRectangulos->setChecked(false);
+    ui->actionCircunferencias->setChecked(false);
+}
+
+
+void Principal::on_actionRectangulos_triggered()
+{
+    m_opcion = 3;
+    ui->actionLineas->setChecked(false);
+    ui->actionLibre->setChecked(false);
+    ui->actionRectangulos->setChecked(true);
+    ui->actionCircunferencias->setChecked(false);
+}
+
+
+void Principal::on_actionCircunferencias_triggered()
+{
+    m_opcion = 4;
+    ui->actionLineas->setChecked(false);
+    ui->actionLibre->setChecked(false);
+    ui->actionRectangulos->setChecked(false);
+    ui->actionCircunferencias->setChecked(true);
+}
+
+
+void Principal::on_actionAbrir_triggered()
+{
+    QString nombreArchivo = QFileDialog::getOpenFileName(this,"Imagen",QDir::home().absolutePath(),"Imagenes(*.jpg *.jpeg *.png);;Todos los ficheros(*)");
+
+           if (nombreArchivo.isNull()){
+              QMessageBox::warning(this, "Mi Paint", "No se puede abrir el archivo");
+              return;
+        }
+        m_dibujo.load(nombreArchivo);
+        m_dibujo = m_dibujo.scaled(ui->centralwidget->size(), Qt::KeepAspectRatio);
+        mImagen = new QImage(m_dibujo);
+
+        mPainter = new QPainter(mImagen);
+        mPainter->setRenderHint(QPainter::Antialiasing);
 }
